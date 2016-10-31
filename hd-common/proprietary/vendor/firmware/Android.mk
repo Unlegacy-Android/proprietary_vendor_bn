@@ -1,8 +1,8 @@
 LOCAL_PATH := $(call my-dir)
 
-ifneq ($(filter ovation hummingbird,$(TARGET_DEVICE)),)
 ifeq ($(TARGET_BOARD_PLATFORM),omap4)
 
+ifneq ($(filter ovation hummingbird,$(TARGET_DEVICE)),)
 include $(CLEAR_VARS)
 LOCAL_MODULE := ducati-m3
 LOCAL_MODULE_OWNER := bn
@@ -12,6 +12,18 @@ LOCAL_MODULE_CLASS := EXECUTABLES
 LOCAL_SRC_FILES := $(LOCAL_MODULE)$(LOCAL_MODULE_SUFFIX)
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/firmware
 include $(BUILD_PREBUILT)
-
 endif
+
+ifeq ($(USE_AMAZON_DUCATI),true)
+include $(CLEAR_VARS)
+LOCAL_MODULE := ducati-m3-core0
+LOCAL_MODULE_OWNER := amz
+LOCAL_MODULE_SUFFIX := .xem3
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := EXECUTABLES
+LOCAL_SRC_FILES := $(LOCAL_MODULE)$(LOCAL_MODULE_SUFFIX)
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/firmware
+include $(BUILD_PREBUILT)
+endif
+
 endif
